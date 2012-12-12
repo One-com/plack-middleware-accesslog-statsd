@@ -1,0 +1,48 @@
+NAME
+    Plack::Middleware::AccessLog::StatsD - Logs requests to StatsD server
+
+SYNOPSIS
+        #in app.psgi
+        use Plack::Builder;
+
+        builder {
+            enable "Plack::Middleware::AccessLog::StatsD",
+                host   => 'statsd.example.net',
+                port   => 8125,
+                prefix => 'my_app';
+
+            $app;
+        };
+
+DESCRIPTION
+    Plack::Middleware::AccessLog::StatsD logs information about individual
+    requests to a StatsD server. Currently the following metrics are logged:
+
+    <prefix>.response.<status> (counter)
+    <prefix>.response_time.<method> (timer)
+    <prefix>.response_time.<method> (timer)
+
+CONFIGURATION
+    The following configuration parameters are available:
+
+    host
+        Hostname for the StatsD server
+
+    port (default: 8125)
+        Port the StatsD server is listeneing on
+
+    prefix
+        Prefix for the keys added to StatsD
+
+SEE ALSO
+    <https://github.com/etsy/statsd>
+
+AUTHOR
+    Peter Makholm <peter@makholm.net>
+
+COPYRIGHT AND LICENSE
+    Copyright (C) 2012 by Peter Makholm.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
